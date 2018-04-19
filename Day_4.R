@@ -9,7 +9,6 @@
 # Load libraries ----------------------------------------------------------
 
 library(tidyverse)
-library(ggplot2)
 
 # t-test ------------------------------------------------------------------
 
@@ -79,12 +78,12 @@ ggplot(data = chicks_21, aes(x = Diet, y = weight, fill = Diet)) +
 chicks_Tukey <- as.data.frame(TukeyHSD(aov(weight ~ Diet, data = chicks_21))$Diet)
 chicks_Tukey$pairs <- as.factor(row.names(chicks_Tukey))
 
-ggplot(data = chicks_Tukey)+
+ggplot(data = chicks_Tukey) +
   geom_segment(aes(x = pairs, xend = pairs, y = lwr, yend = upr +2))+
   geom_hline(aes(yintercept = 0), size = 0.5, colour = "red", linetype = "dashed")+
   coord_flip()
   
-ggplot(data = chicks_Tukey)+
+ggplot(data = chicks_Tukey) +
   geom_errorbar(aes(x = pairs, ymin = lwr, ymax = upr))+
   geom_hline(aes(yintercept = 0), size = 0.5, colour = "red", linetype = "dashed")+
   coord_flip()
@@ -102,7 +101,7 @@ chicks_0_21 <- ChickWeight %>%
   filter(Time %in% c(0, 2, 21))
 
 # Visualise the data
-ggplot(data = chicks_0_21,aes(x = Time, y = weight)) +
+ggplot(data = chicks_0_21,aes(x = as.factor(Time), y = weight)) +
   geom_boxplot(notch = T, aes(fill = as.factor(Time)))
 
 # Run an ANOVA
