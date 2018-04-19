@@ -162,3 +162,7 @@ kruskal.test(weight ~ Diet, data = chicks_0_21)
 # load this for a non-parametic post hoc test
 library(pgirmess)
 kruskalmc(weight ~ Diet, data = chicks_0_21)
+
+# End of day 4 ------------------------------------------------------------
+
+
