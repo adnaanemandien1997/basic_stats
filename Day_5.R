@@ -5,9 +5,10 @@
 # Load libraries ----------------------------------------------------------
 
 library(tidyverse)
-library(Rmisc)
+# library(Rmisc) # Unfortunately this overrides many dplyr functions
 library(ggpubr)
 library(corrplot)
+
 # Load data ---------------------------------------------------------------
 
 snakes <- read_csv("snakes.csv") %>% 
@@ -29,7 +30,7 @@ snakes_summary <- snakes %>%
 
 # Test a hypothesis -------------------------------------------------------
 
-snakes.summary2 <- summarySE(data = snakes,
+snakes.summary2 <- Rmisc::summarySE(data = snakes,
                              measurevar = "openings", # measure variance of openings
                              groupvars = c("day")) # group by day
 
@@ -153,7 +154,7 @@ ggplot(data = moth_traps, aes(x = as.factor(Location),
                           colour = trap)) +
   geom_line(size = 3) +
   geom_point(size = 4)
-
+# RWS: THis doesn't quite make sense as a visualisation...
 
 
 
@@ -171,7 +172,7 @@ plot3 <- ggplot(moth_traps, aes(x = Location, y = count)) +
 
 library(ggpubr)
 finalplot <- ggarrange(plot1, plot2, plot3, nrow = 2, ncol = 2, labels = "AUTO")
-
+finalplot
 
 # Regressions -------------------------------------------------------------
 
